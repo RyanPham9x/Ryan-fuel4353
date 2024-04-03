@@ -63,8 +63,10 @@ DATABASES = {
 }"""
 database_url = os.environ.get('DATABASE_URL')   
 DATABASES["default"] = dj_database_url.parse(database_url)
-#os.environ.get('DATABASE_URL')
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app'
+]
 # Application definition
 
 INSTALLED_APPS = [
