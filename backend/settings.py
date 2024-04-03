@@ -23,16 +23,16 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rhl0ur6pohr@*2phgmo83%6m@cygd$2$8$-xkcr_md&@z@=&@9'
+SECRET_KEY = os.getenv('SECRET_KEY')
 # os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 # os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 # True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "lemonadess.pythonanywhere.com"]
 # os.getenv('ALLOWED_HOSTS').split(' ') 
 
 # These are for Azure deployment.
@@ -44,25 +44,25 @@ ALLOWED_HOSTS = []
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / "db.sqlite3",
     }
 }
-"""DATABASES = {
+"""
+DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DBNAME'),
         'HOST': os.environ.get('DBHOST'),
         'USER': os.environ.get('DBUSER'),
         'PASSWORD': os.environ.get('DBPASS'),
         'PORT': os.environ.get('DBPORT'),
-        'OPTIONS': {'sslmode': 'require'},
     }
 }
-database_url = os.environ.get('DATABASE_URL')   
-DATABASES["default"] = dj_database_url.parse(database_url)
+#database_url = os.environ.get('DATABASE_URL')   
+#DATABASES["default"] = dj_database_url.parse(database_url)
 #os.environ.get('DATABASE_URL')"""
 
 # Application definition
