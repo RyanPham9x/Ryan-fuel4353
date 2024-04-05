@@ -324,3 +324,25 @@ button:hover {
     flex-direction: column;
   }
 }
+
+.password-checklist li {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.password-checklist svg {
+  width: 10px;
+  height: 1.2;
+}
+
+.password-checklist {
+  column-count: 1;
+  column-gap: 10px;
+}
+
+
+.password-checklist li {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}

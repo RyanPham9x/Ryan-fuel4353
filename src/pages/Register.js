@@ -4,7 +4,10 @@ import "../FuelQuoteForm.css";
 import { toast } from 'react-toastify';
 import winnerImg from '../img/yes.png';
 import { cardio } from 'ldrs'
+import PasswordChecklist from "react-password-checklist";
+
 const Register = () => {
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -118,7 +121,18 @@ const Register = () => {
                 {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
               </div>
 
-              <button type="submit" className="button-login" disabled={loading}>
+              {formData.password.length > 0 && (
+                <PasswordChecklist
+                  className="password-checklist"
+                  rules={["minLength", "specialChar", "number", "capital", "match"]}
+                  minLength={5}
+                  value={formData.password}
+                  valueAgain={formData.password2}
+                  onChange={(isValid) => setIsPasswordValid(isValid)}
+                />
+              )}
+              <br />
+              <button type="submit" className="button-login" disabled={loading || !isPasswordValid}>
                 {loading ? <l-cardio
                   size="20"
                   stroke="2"

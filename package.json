@@ -1,6 +1,6 @@
 {
   "name": "fuel_quote_app",
-  "version": "1.2.0",
+  "version": "1.5.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
@@ -16,6 +16,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
+    "react-password-checklist": "^1.5.1",
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.4",
