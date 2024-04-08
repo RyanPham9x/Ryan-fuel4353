@@ -125,7 +125,7 @@ const Register = () => {
                 <PasswordChecklist
                   className="password-checklist"
                   rules={["minLength", "specialChar", "number", "capital", "match"]}
-                  minLength={5}
+                  minLength={8}
                   value={formData.password}
                   valueAgain={formData.password2}
                   onChange={(isValid) => setIsPasswordValid(isValid)}
