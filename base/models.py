@@ -5,12 +5,12 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Profile(models.Model): #models.py file define the database schema. Each class is a table in the database.
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    full_name = models.CharField(max_length=50, blank=True)
-    addressOne = models.CharField(max_length=100, blank=True)
+    full_name = models.CharField(max_length=50)
+    addressOne = models.CharField(max_length=100)
     addressTwo = models.CharField(max_length=100, blank=True)
-    city = models.CharField(max_length=100, blank=True)
-    state = models.CharField(max_length=2, blank=True)
-    zip_code = models.CharField(max_length=9, blank=True,
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2)
+    zip_code = models.CharField(max_length=9,
         validators=[
             RegexValidator(
                 regex=r'^\d{5}(\d{4})?$',
@@ -36,10 +36,3 @@ class QuoteForm(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.delivery_date}"
-
-    """def save(self, *args, **kwargs):
-        if not self.pk:  # Check if the quote is being created for the first time
-            profile = self.user.profile
-            # Combine address fields from the user's profile for this quote
-            self.delivery_address = f"{profile.addressOne} {profile.addressTwo}, {profile.city}, {profile.state}, {profile.zip_code}"
-        super().save(*args, **kwargs)"""

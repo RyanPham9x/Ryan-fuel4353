@@ -289,6 +289,20 @@ class ProfileSerializerTestCase(TestCase):
         self.assertFalse(serializer.is_valid())
         self.assertIn('full_name', serializer.errors)
 
+    def test_required_field_full_name_blank(self):
+        # Testing required full_name field left blank
+        data = {
+            'full_name': '',  # Required field left blank
+            'addressOne': '123 Main St',
+            'city': 'Anytown',
+            'state': 'AN',
+            'zip_code': '12345'
+        }
+        serializer = ProfileSerializer(data=data)
+        self.assertFalse(serializer.is_valid(), "Serializer should not be valid when required 'full_name' is left blank")
+        self.assertIn('full_name', serializer.errors, "Validation error should include 'full_name'")
+        self.assertRegex(str(serializer.errors['full_name'][0]), 'This field may not be blank.', "Error message should indicate that the 'full_name' field cannot be blank")
+
     def test_zip_code_validation(self):
         # Testing zip_code length validation
         invalid_zip_codes = ['1234', '123456', '1234567890']
