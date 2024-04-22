@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import winnerImg from '../img/yes.png';
 import { cardio } from 'ldrs'
 import PasswordChecklist from "react-password-checklist";
+import { MDBTooltip } from 'mdb-react-ui-kit';
 
 const Register = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -17,9 +18,13 @@ const Register = () => {
   const navigate = useNavigate();
   const [errors] = useState({});
   cardio.register()
-
+  const [isUsernameValid, setIsUsernameValid] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "username") {
+      const isValid = /^[a-zA-Z0-9]+$/.test(value) && value.length >= 4 && value.length <= 50;
+      setIsUsernameValid(isValid);
+    }
     setFormData({
       ...formData,
       [name]: value,
@@ -87,13 +92,24 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
               <div className="login-form-group">
                 <label htmlFor="username">Username:</label>
-                <input type="text"
-                  name="username"
-                  className="retrieve-address"
-                  placeholder="Enter username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  required />
+                <MDBTooltip tag="div"
+                  title={isUsernameValid && formData.username ?
+                    <span className="text-success">
+                      <i className="fas fa-check-circle"></i></span> :
+                    "Username must consist of letters and numbers only and be between 4 and 50 characters long"
+                  }
+                  placement="top"
+                  disable={!formData.username}>
+                  <input
+                    type="text"
+                    name="username"
+                    className="retrieve-address"
+                    placeholder="Enter username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                  />
+                </MDBTooltip>
               </div>
               <div className="login-form-group">
                 <label htmlFor="password">Password:</label>
@@ -132,7 +148,7 @@ const Register = () => {
                 />
               )}
               <br />
-              <button type="submit" className="button-login" disabled={loading || !isPasswordValid}>
+              <button type="submit" className="button-login" disabled={!isUsernameValid || !isPasswordValid || loading}>
                 {loading ? <l-cardio
                   size="20"
                   stroke="2"
