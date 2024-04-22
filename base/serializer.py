@@ -26,6 +26,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         return value
     
 class UserRegistrationSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(
+        validators=[
+            RegexValidator(
+                regex='^[a-zA-Z0-9]*$',
+                message='Username must be alphanumeric',
+                code='invalid_username'
+            )
+        ],
+        min_length=4,
+        max_length=50
+    )
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True, label="Confirm Password")
 
