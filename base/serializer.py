@@ -56,6 +56,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+    
+    def validate_username(self, value):
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("This username is already in use. Please choose a different one.")
+        return value
 
 class QuoteSerializer(serializers.ModelSerializer):
     class Meta:
