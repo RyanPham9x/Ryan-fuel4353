@@ -33,7 +33,6 @@ Step 4: Open ```localhost:3000``` and try out the features.<br><br>
     - Quote History <br>
     - Pricing Module<br>
     - Unit Tests with Code Coverage over 90%<br>
-    - PostgreSQL DB is hosted on Railway.app<br>
 
-**Project Deployment URL:** https://g52.lemonadess.com/ <br><br>
+**Project Deployment URL:** https://pa.lemonadess.com/ <br><br>
 
